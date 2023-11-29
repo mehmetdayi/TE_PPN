@@ -1,0 +1,33 @@
+######################################
+
+#Genome size prediction by each TE class using Multiple linear regression 
+## read log transformed data to R
+TE <- read.table("TE_GenomeSize_TE_families_log.txt", header = T)
+
+#perform multiple linear resgression test
+PPN_lm_model <- lm(Genome~DNA+LTR+LINE+SINE, data = TE)
+
+#summary the model
+summary(PPN_lm_model)
+
+
+Call:
+  lm(formula = Genome ~ DNA + LTR + LINE + SINE, data = TE)
+
+Residuals:
+  Min       1Q   Median       3Q      Max 
+-0.38643 -0.06982  0.04426  0.11568  0.23700 
+
+Coefficients:
+  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  7.920675   0.094127  84.149  < 2e-16 ***
+  DNA          0.244568   0.076998   3.176  0.00455 ** 
+  LTR          0.263206   0.141762   1.857  0.07744 .  
+LINE         0.161542   0.107139   1.508  0.14651    
+SINE        -0.008865   0.059823  -0.148  0.88360    
+---
+  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1688 on 21 degrees of freedom
+Multiple R-squared:  0.6617,	Adjusted R-squared:  0.5972 
+F-statistic: 10.27 on 4 and 21 DF,  p-value: 9.09e-05
