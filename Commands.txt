@@ -1,0 +1,26 @@
+
+
+
+#############################################
+## RepeatModeler run
+RepeatModeler -LTRStruct -pa 32 -database ABESSEYI
+
+
+##############################################
+## RepeatMasker run
+
+RepeatMasker -pa 32 -gff -a -lib luci-families.fa -e ncbi M.luci.clean.txt.fa -dir luci_Rmasker
+
+##############################################
+## TransposonPSI run
+transposonPSI.pl  species.protein.fa prot
+
+#############################################
+## Busco run
+
+busco -i Species.genome.fa -l nematoda_odb10 -o Species.genome.fa.BUSCO -m genome -c 16
+
+############################################
+## cd-hit for clustering unclassified TEs
+
+cd-hit -i Unclassified.combined.TE.fasta -o cd_hit_out -T 32
